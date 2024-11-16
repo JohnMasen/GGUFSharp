@@ -8,7 +8,7 @@
         public void TestMethod1()
         {
             GGUFReader reader = new GGUFReader();
-            reader.Read(GGUFFilePath);
+            var f=reader.Read(GGUFFilePath);
         }
     }
 }

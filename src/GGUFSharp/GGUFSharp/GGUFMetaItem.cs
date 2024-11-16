@@ -29,7 +29,6 @@ namespace GGUFSharp
                         {
                             return string.Join(", ", ArrayStrings);
                         }
-                        
                     }
                     else
                     {
