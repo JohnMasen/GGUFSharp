@@ -14,29 +14,34 @@ namespace GGUFSharp
         public string[] ArrayStrings { get; set; }
         public override string ToString()
         {
+            StringBuilder sb = new StringBuilder($"{Name}:");
             switch(DataType)
             {
                 case GGUFDataTypeEnum.GGUF_METADATA_VALUE_TYPE_STRING:
-                return Encoding.UTF8.GetString(RawData);
+                    sb.Append(Encoding.UTF8.GetString(RawData));
+                    break;
                 case GGUFDataTypeEnum.GGUF_METADATA_VALUE_TYPE_ARRAY:
                     if (ArrayElementType==GGUFDataTypeEnum.GGUF_METADATA_VALUE_TYPE_STRING)
                     {
                         if (ArrayStrings.Length>10)
                         {
-                            return $"{string.Join(", ", ArrayStrings.Take(10))}...";
+                            sb.Append($"{string.Join(", ", ArrayStrings.Take(10))}...");
                         }
                         else
                         {
-                            return string.Join(", ", ArrayStrings);
+                            sb.Append(string.Join(", ", ArrayStrings));
                         }
                     }
                     else
                     {
-                        return $"[{Enum.GetName(typeof(GGUFDataTypeEnum), ArrayElementType)}]";
+                        sb.Append($"[{Enum.GetName(typeof(GGUFDataTypeEnum), ArrayElementType)}]");
                     }
+                    break;
                 default:
-                    return Enum.GetName(typeof(GGUFDataTypeEnum), DataType);
+                    sb.Append(Enum.GetName(typeof(GGUFDataTypeEnum), DataType));
+                    break;
             };
+            return sb.ToString();
         }
     }
 }

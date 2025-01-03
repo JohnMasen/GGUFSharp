@@ -18,13 +18,27 @@ namespace GGUFSharp
             using var s = fs.CreateViewStream(0, 0, MemoryMappedFileAccess.Read);
             var header = readHeader(s);
             //using var meta = fs.CreateViewStream(24, 100*1024 * 1024, MemoryMappedFileAccess.Read);
-            var d = readMetaData(s, header.MetaKVCount);
+            var d = readMetaData(s, header.MetaKVCount).ToList();
+            
             //foreach (var item in d)
             //{
             //    Debug.WriteLine($"{item.Name}, {item.ToString()}");
             //}
 
-            var t = readTensorData(s, header.TensorCount);
+            var t = readTensorData(s, header.TensorCount).ToList();
+            ulong alignment = 32;//TODO: read align from header
+
+
+            ulong startOffset = (ulong)s.Position +(alignment-((ulong)s.Position % alignment))% alignment;
+            var sortedItems = t.OrderBy(x => x.Offset).ToList();
+            for (var i = 0; i < sortedItems.Count - 1; i++)
+            {
+                sortedItems[i].Size = sortedItems[i + 1].Offset - sortedItems[i].Offset;
+            }
+            var last = sortedItems.Last();
+            last.Size = (ulong)new FileInfo(filePath).Length - last.Offset-startOffset;
+
+
             //foreach (var item in t)
             //{
             //    Debug.WriteLine($"[Tensor]{item.Name},{item.DimensionCount},{item.TensorType.ToString()},{item.Offset}");
@@ -32,11 +46,26 @@ namespace GGUFSharp
             return new GGUFFile()
             {
                 FilePath = filePath,
-                MetaItems = d.ToList(),
-                TensorInfos = t.ToList(),
-                Version = header.Version
+                MetaItems = d,
+                TensorInfos = sortedItems,
+                Version = header.Version,
+                DataStartOffset = startOffset,
             };
 
+        }
+
+        public IMemoryOwner<byte> ReadTensorData(GGUFFile file,GGUFTensorInfo tensor)
+        {
+            using var fs = MemoryMappedFile.CreateFromFile(file.FilePath);
+            using var s = fs.CreateViewStream((long)(file.DataStartOffset+tensor.Offset), (long)tensor.Size, MemoryMappedFileAccess.Read);
+            if (tensor.Size>int.MaxValue)
+            {
+                throw new NotSupportedException("Not supoorted by now, tensor size shoud not larger than max value of int32");
+            }
+            var om = MemoryPool<byte>.Shared.Rent((int)tensor.Size);
+            //BinaryReader br=new BinaryReader(s);
+            s.Read(om.Memory.Span);
+            return om;
         }
 
 
