@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Description" xml:space="preserve">
+    <value>Displays the structure of a GGUF file.</value>
+  </data>
+  <data name="Usage" xml:space="preserve">
+    <value>Usage: GGUFSharp.Console [--json] &lt;path-to-gguf&gt;</value>
+  </data>
+  <data name="JsonOption" xml:space="preserve">
+    <value>Options: --json, -j  Output the GGUF structure as JSON.</value>
+  </data>
+  <data name="FileLabel" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="VersionLabel" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="MetadataCountLabel" xml:space="preserve">
+    <value>Metadata count</value>
+  </data>
+  <data name="TensorCountLabel" xml:space="preserve">
+    <value>Tensor count</value>
+  </data>
+  <data name="DataStartOffsetLabel" xml:space="preserve">
+    <value>Data start offset</value>
+  </data>
+  <data name="MetadataTitle" xml:space="preserve">
+    <value>Metadata</value>
+  </data>
+  <data name="TensorsTitle" xml:space="preserve">
+    <value>Tensors</value>
+  </data>
+  <data name="MetadataEntryFormat" xml:space="preserve">
+    <value>- {0} [{1}] = {2}</value>
+  </data>
+  <data name="TensorEntryFormat" xml:space="preserve">
+    <value>- {0} [{1}] dims={2} offset={3} size={4}</value>
+  </data>
+  <data name="ArrayTypeNameFormat" xml:space="preserve">
+    <value>Array&lt;{0}&gt;</value>
+  </data>
+  <data name="ArrayValueFormat" xml:space="preserve">
+    <value>[{0}]</value>
+  </data>
+  <data name="ArrayValueWithEllipsisFormat" xml:space="preserve">
+    <value>[{0}, {1}]</value>
+  </data>
+  <data name="EmptyArrayValue" xml:space="preserve">
+    <value>[]</value>
+  </data>
+  <data name="EmptyValue" xml:space="preserve">
+    <value>(empty)</value>
+  </data>
+  <data name="NoneValue" xml:space="preserve">
+    <value>(none)</value>
+  </data>
+  <data name="UnsupportedValue" xml:space="preserve">
+    <value>(unsupported)</value>
+  </data>
+  <data name="InvalidBooleanValue" xml:space="preserve">
+    <value>invalid({0})</value>
+  </data>
+  <data name="ScalarDimensions" xml:space="preserve">
+    <value>scalar</value>
+  </data>
+  <data name="MissingFilePath" xml:space="preserve">
+    <value>Missing GGUF file path argument.</value>
+  </data>
+  <data name="InvalidArguments" xml:space="preserve">
+    <value>Invalid command line arguments.</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>File does not exist: {0}</value>
+  </data>
+  <data name="ErrorPrefix" xml:space="preserve">
+    <value>Error: {0}</value>
+  </data>
+  <data name="Ellipsis" xml:space="preserve">
+    <value>...</value>
+  </data>
+</root>
