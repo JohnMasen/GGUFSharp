@@ -120,46 +120,46 @@ namespace GGUFSharp.ConsoleApp
 
         private static void WriteUsage()
         {
-            global::System.Console.WriteLine(GetString("Description"));
-            global::System.Console.WriteLine(GetString("Usage"));
-            global::System.Console.WriteLine(GetString("JsonOption"));
+            Console.WriteLine(GetString("Description"));
+            Console.WriteLine(GetString("Usage"));
+            Console.WriteLine(GetString("JsonOption"));
         }
 
         private static void WriteFileStructure(GGUFFile file)
         {
             ArgumentNullException.ThrowIfNull(file);
 
-            global::System.Console.WriteLine($"{GetString("FileLabel")}: {file.FilePath}");
-            global::System.Console.WriteLine($"{GetString("VersionLabel")}: {file.Version}");
-            global::System.Console.WriteLine($"{GetString("MetadataCountLabel")}: {file.MetaItems.Count}");
-            global::System.Console.WriteLine($"{GetString("TensorCountLabel")}: {file.TensorInfos.Count}");
-            global::System.Console.WriteLine($"{GetString("DataStartOffsetLabel")}: {file.DataStartOffset}");
-            global::System.Console.WriteLine();
-            global::System.Console.WriteLine(GetString("MetadataTitle"));
+            Console.WriteLine($"{GetString("FileLabel")}: {file.FilePath}");
+            Console.WriteLine($"{GetString("VersionLabel")}: {file.Version}");
+            Console.WriteLine($"{GetString("MetadataCountLabel")}: {file.MetaItems.Count}");
+            Console.WriteLine($"{GetString("TensorCountLabel")}: {file.TensorInfos.Count}");
+            Console.WriteLine($"{GetString("DataStartOffsetLabel")}: {file.DataStartOffset}");
+            Console.WriteLine();
+            Console.WriteLine(GetString("MetadataTitle"));
 
             if (file.MetaItems.Count == 0)
             {
-                global::System.Console.WriteLine($"  {GetString("NoneValue")}");
+                Console.WriteLine($"  {GetString("NoneValue")}");
             }
             else
             {
                 foreach (var metaItem in file.MetaItems)
                 {
-                    global::System.Console.WriteLine($"  {FormatMetadataItem(metaItem)}");
+                    Console.WriteLine($"  {FormatMetadataItem(metaItem)}");
                 }
             }
 
-            global::System.Console.WriteLine();
-            global::System.Console.WriteLine(GetString("TensorsTitle"));
+            Console.WriteLine();
+            Console.WriteLine(GetString("TensorsTitle"));
             if (file.TensorInfos.Count == 0)
             {
-                global::System.Console.WriteLine($"  {GetString("NoneValue")}");
+                Console.WriteLine($"  {GetString("NoneValue")}");
                 return;
             }
 
             foreach (var tensorInfo in file.TensorInfos)
             {
-                global::System.Console.WriteLine($"  {FormatTensorItem(tensorInfo)}");
+                Console.WriteLine($"  {FormatTensorItem(tensorInfo)}");
             }
         }
 
@@ -197,7 +197,7 @@ namespace GGUFSharp.ConsoleApp
                 WriteIndented = true
             });
 
-            global::System.Console.WriteLine(json);
+            Console.WriteLine(json);
         }
 
         private static string FormatMetadataItem(GGUFMetaItem item)
@@ -392,7 +392,7 @@ namespace GGUFSharp.ConsoleApp
 
         private static void WriteError(string message)
         {
-            global::System.Console.Error.WriteLine(string.Format(CultureInfo.CurrentCulture, GetString("ErrorPrefix"), message));
+            Console.Error.WriteLine(string.Format(CultureInfo.CurrentCulture, GetString("ErrorPrefix"), message));
         }
     }
 }

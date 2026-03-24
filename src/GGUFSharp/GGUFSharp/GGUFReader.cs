@@ -17,13 +17,8 @@ namespace GGUFSharp
             using var fs = MemoryMappedFile.CreateFromFile(filePath);
             using var s = fs.CreateViewStream(0, 0, MemoryMappedFileAccess.Read);
             var header = readHeader(s);
-            //using var meta = fs.CreateViewStream(24, 100*1024 * 1024, MemoryMappedFileAccess.Read);
             var d = readMetaData(s, header.MetaKVCount).ToList();
             
-            //foreach (var item in d)
-            //{
-            //    Debug.WriteLine($"{item.Name}, {item.ToString()}");
-            //}
 
             var t = readTensorData(s, header.TensorCount).ToList();
             ulong alignment = 32;//TODO: read align from header
@@ -39,10 +34,6 @@ namespace GGUFSharp
             last.Size = (ulong)new FileInfo(filePath).Length - last.Offset-startOffset;
 
 
-            //foreach (var item in t)
-            //{
-            //    Debug.WriteLine($"[Tensor]{item.Name},{item.DimensionCount},{item.TensorType.ToString()},{item.Offset}");
-            //}
             return new GGUFFile()
             {
                 FilePath = filePath,
@@ -63,7 +54,6 @@ namespace GGUFSharp
                 throw new NotSupportedException("Not supoorted by now, tensor size shoud not larger than max value of int32");
             }
             var om = MemoryPool<byte>.Shared.Rent((int)tensor.Size);
-            //BinaryReader br=new BinaryReader(s);
             s.Read(om.Memory.Span);
             return om;
         }

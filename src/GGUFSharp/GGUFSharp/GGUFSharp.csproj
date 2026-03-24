@@ -3,6 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Title>Read/Write GGUF files</Title>
+    <Description>Read/Write GGUF files</Description>
+    <PackageProjectUrl>https://github.com/JohnMasen/GGUFSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/JohnMasen/GGUFSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>GGUF;C#</PackageTags>
   </PropertyGroup>
 
 </Project>
