@@ -1,15 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>GGUFSharp</PackageId>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <Title>Read/Write GGUF files</Title>
-    <Description>Read/Write GGUF files</Description>
+    <Title>GGUFSharp</Title>
+    <Description>A .NET library for reading and inspecting GGUF files, including metadata, tensor descriptors, and raw tensor bytes.</Description>
+    <Authors>Clock Set Bird</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageProjectUrl>https://github.com/JohnMasen/GGUFSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/JohnMasen/GGUFSharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>GGUF;C#</PackageTags>
+    <PackageTags>GGUF;C#;dotnet;LLM;ggml</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>

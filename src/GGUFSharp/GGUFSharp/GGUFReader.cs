@@ -12,6 +12,11 @@ namespace GGUFSharp
 {
     public class GGUFReader
     {
+        /// <summary>
+        /// Reads a GGUF file and parses its header, metadata entries, tensor descriptors, and data section offset.
+        /// </summary>
+        /// <param name="filePath">The path to the GGUF file.</param>
+        /// <returns>A <see cref="GGUFFile" /> describing the parsed file structure.</returns>
         public GGUFFile Read(string filePath)
         {
             using var fs = MemoryMappedFile.CreateFromFile(filePath);
@@ -45,6 +50,19 @@ namespace GGUFSharp
 
         }
 
+        /// <summary>
+        /// Reads the raw byte payload for a tensor from a parsed GGUF file.
+        /// </summary>
+        /// <param name="file">The parsed GGUF file descriptor.</param>
+        /// <param name="tensor">The tensor descriptor to read.</param>
+        /// <returns>
+        /// An <see cref="IMemoryOwner{T}" /> containing the tensor bytes.
+        /// The caller owns the returned buffer and must dispose it after use.
+        /// </returns>
+        /// <remarks>
+        /// The returned buffer is rented from <see cref="MemoryPool{T}.Shared" />.
+        /// If the caller does not dispose it explicitly, the rented memory can remain occupied longer than necessary.
+        /// </remarks>
         public IMemoryOwner<byte> ReadTensorData(GGUFFile file,GGUFTensorInfo tensor)
         {
             using var fs = MemoryMappedFile.CreateFromFile(file.FilePath);
